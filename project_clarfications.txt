@@ -1,0 +1,20 @@
+The SWI Prolog app doesn't let you define your own concat, reverse and flatten since they are built-in predicates. 
+Please rename them to my_concat, my_reverse and my_flatten.
+
+Do no use any built-in predicates for lists in Part 1 #1-4, except for "append" and "is_list" in "my_flatten". You may use anything in "compress" and part2. 
+When grading, this is the rough format of how we are gonna test your code:
+
+my_concat(l1, l2, X) where l1 and l2 are given and your program should output the solution for X.
+my_concat(l1, l2, l3) where l1, l2 and l3 are given and your program should output true or false.
+element_at(a, N, l) where a and l are given and your program should output the solution for N.
+element_at(X, n, l) where n and l are given and your program should output the solution for X.
+element_at(a, n, l) where a, n and l are given and your program should output true or false.
+my_reverse(l, L) where l is given and your program should output the solution for L.
+my_reverse(L, l) where l is given and your program should output the solution for L.
+my_reverse(l1, l2) where l1 and l2 are given and your program should output true or false.
+my_flatten(l, X) where l is given and your program should output the solution for X.
+my_flatten(l1, l2) where l1 and l2 are given and your program should output true or false.
+compress(l, X) where l is given and your program should output the solution for X.
+compress(l1, l2) where l1 and l2 are given and your program should output true or false.
+queens(n, X) where n is given and your program should output the solutions for X.
+queens(n, l) where n and l are given and your program should output true or false. 

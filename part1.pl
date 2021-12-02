@@ -19,35 +19,35 @@
 % 	  	We now know X is [c,d]... coming out of recursion
 %	  	([a], [b,c], [b,c,d])
 %	  	([a,b], [b,c], [a,b,c,d])
-
+%
 % Ex 2. my_concat([a,b], [c,d], [a,b,c,e])
 %	  	([a,b], [c,d], [b,c,e])
 %	  	([a], [c,d], [c,e])
 %	  	([], [c,d], [c,e]) -> false
 %
-my_concat([], List, List).								% Base case; only one list, so no concatination needed					
-my_concat([Head|List1], List2, [Head|List3]) :-			% Main case; 		
-	my_concat(List1, List2, List3).
+my_concat([], List, List).							% Base case; only one list, so no concatination needed					
+my_concat([Head|List1], List2, [Head|List3]) :-		% Main case; Prepend head of first list to Final list.		
+	my_concat(List1, List2, List3).					% Recurse with Tail of first list.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% element_at(X, N, L): Determine if element X is the Nth item in list L.
+% my_element_at(X, N, L): Determine if element X is the Nth item in list L.
 %
-% element_at(a, N, l) where a and l are given and your program should output the solution for N.
-% element_at(X, n, l) where n and l are given and your program should output the solution for X.
-% element_at(a, n, l) where a, n and l are given and your program should output true or false.
+% my_element_at(a, N, l) where a and l are given and your program should output the solution for N.
+% my_element_at(X, n, l) where n and l are given and your program should output the solution for X.
+% my_element_at(a, n, l) where a, n and l are given and your program should output true or false.
 %
-% Examples: element_at(2, 1, [2, 3, 4]) is true.
-%           element_at(2, 1, [3, 2, 4]) is false.
-%           element_at(2, 1, [[2], 3, 4]) is false.
-%           element_at(5, 2, [3, 2, 4]) is false.
+% Examples: my_element_at(2, 1, [2, 3, 4]) is true.
+%           my_element_at(2, 1, [3, 2, 4]) is false.
+%           my_element_at(2, 1, [[2], 3, 4]) is false.
+%           my_element_at(5, 2, [3, 2, 4]) is false.
 %
 % You may assume N ≥ 1 and List non-empty.
 %
-my_element_at(X, 1, [X|_]).
-my_element_at(X, N, [_|Tail]) :-
-	element_at(X, NewN, Tail),
-	N is NewN+1.
+my_element_at(X, 1, [X|_]).							% Base case; Input X is the first element in given List.
+my_element_at(X, N, [_|Tail]) :-					% Main case; Recurse until X = X and N = 1. Pop head of List and Subtract N by one each iteration.
+	my_element_at(X, NewN, Tail),						% Didn't find X at front of list, so it isn't the Nth element.
+	N is NewN+1.									% Subtract N by one.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -92,19 +92,19 @@ my_flatten([Head | List1], List2) :-			% Main case; Continually pop the head of 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% compress(L1, L2): Given a list L1,L2 is its compressed version by eliminating the duplicates.
+% my_compress(L1, L2): Given a list L1,L2 is its compressed version by eliminating the duplicates.
 %
-% Examples: compress([1, 2, 3], [1, 2, 3]) is true.
-% 			compress([1, 2, 2], [1, 2]) is true.
-%			compress([1, 2, [2]], [1, 2]) is false.
-%			compress([1, 2, [3, 4], [5], [5], [3]], [1, 2, [3, 4], [5], [3]]) is true.
+% Examples: my_compress([1, 2, 3], [1, 2, 3]) is true.
+% 			my_compress([1, 2, 2], [1, 2]) is true.
+%			my_compress([1, 2, [2]], [1, 2]) is false.
+%			my_compress([1, 2, [3, 4], [5], [5], [3]], [1, 2, [3, 4], [5], [3]]) is true.
 %
-% compress(l, X) where l is given and your program should output the solution for X.
-% compress(l1, l2) where l1 and l2 are given and your program should output true or false.
+% my_compress(l, X) where l is given and your program should output the solution for X.
+% my_compress(l1, l2) where l1 and l2 are given and your program should output true or false.
 %
 my_compress([],[]).								% Base case; lists are empty, nothing to compress
 my_compress([Head|List1], List2) :-				% Main case; Head of the current list is a duplicate (with the tail of that same list), recurse with tail
 	member(Head, List1),						% Head is already a member. Discard it.
-	compress(List1, List2).						% Compress Tail.
-my_compress([Head|List1], [Head|List2]) :-			% If we get here, we are not a head is not a member of the current list
-	compress(List1, List2).						% Prepend Head to List2, since it wasn't a member before. Compress Tail of List1
+	my_compress(List1, List2).						% Compress Tail.
+my_compress([Head|List1], [Head|List2]) :-		% If we get here, we are not a head is not a member of the current list
+	my_compress(List1, List2).						% Prepend Head to List2, since it wasn't a member before. Compress Tail of List1
