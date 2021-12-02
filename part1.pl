@@ -44,8 +44,8 @@ my_concat([Head|List1], List2, [Head|List3]) :-			% Main case;
 %
 % You may assume N ≥ 1 and List non-empty.
 %
-element_at(X, 1, [X|_]).
-element_at(X, N, [_|Tail]) :-
+my_element_at(X, 1, [X|_]).
+my_element_at(X, N, [_|Tail]) :-
 	element_at(X, NewN, Tail),
 	N is NewN+1.
 
@@ -102,9 +102,9 @@ my_flatten([Head | List1], List2) :-			% Main case; Continually pop the head of 
 % compress(l, X) where l is given and your program should output the solution for X.
 % compress(l1, l2) where l1 and l2 are given and your program should output true or false.
 %
-compress([],[]).								% Base case; lists are empty, nothing to compress
-compress([Head|List1], List2) :-				% Main case; Head of the current list is a duplicate (with the tail of that same list), recurse with tail
+my_compress([],[]).								% Base case; lists are empty, nothing to compress
+my_compress([Head|List1], List2) :-				% Main case; Head of the current list is a duplicate (with the tail of that same list), recurse with tail
 	member(Head, List1),						% Head is already a member. Discard it.
 	compress(List1, List2).						% Compress Tail.
-compress([Head|List1], [Head|List2]) :-			% If we get here, we are not a head is not a member of the current list
+my_compress([Head|List1], [Head|List2]) :-			% If we get here, we are not a head is not a member of the current list
 	compress(List1, List2).						% Prepend Head to List2, since it wasn't a member before. Compress Tail of List1
